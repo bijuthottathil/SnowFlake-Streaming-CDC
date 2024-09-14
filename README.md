@@ -74,6 +74,88 @@ Multiple operations together
 
 ![image](https://github.com/user-attachments/assets/7eca6e18-9988-4802-806e-e7f9af18c630)
 
+# -- ******* Process UPDATE,INSERT & DELETE simultaneously  ********   
+![image](https://github.com/user-attachments/assets/76bc8614-fdc6-434b-bb79-961dcd52538c)
+
+Below code used to insert initial records in final table
+
+-- Insert into final table
+  insert into sales_final_table 
+  select s.id ,
+  s.product ,
+  s.price ,
+  s.amount ,
+  s.store_id,st.location,st.employees from 
+  sales_raw_staging s join store_table st on st.store_id= s.store_id
+
+![image](https://github.com/user-attachments/assets/4363d2b6-1140-4f91-b6e0-1d4a283d145c)
+
+![image](https://github.com/user-attachments/assets/612f28e3-ff1f-4d5a-b2be-51fff41b246f)
+
+![image](https://github.com/user-attachments/assets/0c3e5f10-b684-4e58-89eb-1c7f24129c03)
+
+
+So far no data
+
+![image](https://github.com/user-attachments/assets/7c2a9011-17d5-4eae-bb6c-6be505cb14a4)
+
+
+
+
+![image](https://github.com/user-attachments/assets/1ca7af3e-0c36-4bdc-9f1f-5a118571d0df)
+
+
+Fixed from here
+
+![image](https://github.com/user-attachments/assets/b1fd9bf4-5f57-48ac-9c78-2604822e3067)
+
+![image](https://github.com/user-attachments/assets/d2898c78-26d6-4061-92a2-a2696e247d25)
+
+![image](https://github.com/user-attachments/assets/9961a412-b66c-49df-aa2c-9e8bb8b6213b)
+
+Doing 3 operations together
+
+![image](https://github.com/user-attachments/assets/ff55c6e0-80ce-4ead-9caa-35d646c3c3db)
+
+![image](https://github.com/user-attachments/assets/77d5c731-4cef-4def-8049-40702a348c37)
+
+
+-- Merging all changes in single command
+
+![image](https://github.com/user-attachments/assets/d8a24fd2-8440-4ca4-9159-c4d9196802f5)
+
+
+-- Merging all changes in single command
+
+merge into sales_final_table f using
+(select stre.* , st.location ,st.employees from sales_stream stre join store_table st on st.store_id=stre.store_id) S
+on f.id=s.id
+when matched
+and s.metadata$isupdate='TRUE' and s.metadata$action='INSERT'
+then update
+set  f.product=S.product ,f.price=S.price,f.amount=S.amount,f.store_id=S.store_id
+when matched
+and s.metadata$action='DELETE' and s.metadata$isupdate='FALSE'
+then delete
+when not matched
+and S.metadata$action='INSERT' then
+insert (id,product,price,amount,store_id,location,employees) values(S.id,S.product,S.price,S.amount,S.store_id,S.location,S.employees)
+
+
+![image](https://github.com/user-attachments/assets/d6570ebb-a100-4852-a2dd-61ecc72c4fde)
+
+
+![image](https://github.com/user-attachments/assets/34afe670-fd92-4357-8eeb-7537e1ec59b2)
+
+
+
+
+
+
+
+
+
+
 
 
 
