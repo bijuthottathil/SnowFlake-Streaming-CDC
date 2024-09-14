@@ -148,16 +148,43 @@ insert (id,product,price,amount,store_id,location,employees) values(S.id,S.produ
 ![image](https://github.com/user-attachments/assets/34afe670-fd92-4357-8eeb-7537e1ec59b2)
 
 
+------- Automatate the updates using tasks --
+
+New task created the same queries used above
+
+![image](https://github.com/user-attachments/assets/3031394e-a86e-4a07-af0d-f6d2eb7d2954)
+
+To run task, execute below
+
+
+![image](https://github.com/user-attachments/assets/fa7e9b4c-2494-4fd5-bedf-be126fcb4e1c)
+
+
+
+![image](https://github.com/user-attachments/assets/7712765c-ec23-444f-ab2d-e6fe2676c97d)
+
+
+
+![image](https://github.com/user-attachments/assets/4a433592-7e9f-4943-86a3-482a3f9db4fe)
+
+
+![image](https://github.com/user-attachments/assets/59b0a986-cade-4c25-abcc-a7c8f36cd56a)
+
+
+
+![image](https://github.com/user-attachments/assets/c55631ff-4a64-4117-8e84-97ef445561d1)
+
+
+// Verify the history
+select *
+from table(information_schema.task_history())
+order by name asc,scheduled_time desc;
 
 
 
 
 
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/1d78b7ae-6237-4223-a221-93226da5f7aa)
 
 
 
