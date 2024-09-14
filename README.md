@@ -43,6 +43,42 @@ You will see 2 entries. delete and insert
 
 ![image](https://github.com/user-attachments/assets/e3f8a4ea-a60e-4b51-9a65-6216c091c8a0)
 
+To get update entry in final table, use merge statement like below
+
+merge into SALES_FINAL_TABLE F      -- Target table to merge changes from source table
+using SALES_STREAM S                -- Stream that has captured the changes
+   on  f.id = s.id                 
+when matched 
+    and S.METADATA$ACTION ='INSERT'
+    and S.METADATA$ISUPDATE ='TRUE'        -- Indicates the record has been updated 
+    then update 
+    set f.product = s.product,
+        f.price = s.price,
+        f.amount= s.amount,
+        f.store_id=s.store_id;
+You can see banana is updated with potato in final table using merge
+
+![image](https://github.com/user-attachments/assets/7996396c-747c-4804-83fc-37611905f523)
+
+
+Handling delete in stream
+
+![image](https://github.com/user-attachments/assets/cb058918-c145-4cf8-877b-61b39ce5101d)
+
+![image](https://github.com/user-attachments/assets/4d7a45d6-2ad1-4057-aad6-58ab0d0497c3)
+
+![image](https://github.com/user-attachments/assets/7ca9b712-d05e-443d-b6f6-b6a84a0fc125)
+
+
+
+
+
+
+
+
+        
+
+
 
 
 
