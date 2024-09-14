@@ -70,6 +70,11 @@ Handling delete in stream
 ![image](https://github.com/user-attachments/assets/7ca9b712-d05e-443d-b6f6-b6a84a0fc125)
 
 
+Multiple operations together
+
+![image](https://github.com/user-attachments/assets/7eca6e18-9988-4802-806e-e7f9af18c630)
+
+
 
 
 
